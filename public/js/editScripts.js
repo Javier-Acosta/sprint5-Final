@@ -1,10 +1,9 @@
-
 window.addEventListener("load", () => {
 
-    const btnEditarSuperheroe = document.getElementById('btnEditarSuperheroe')
+    const btnEditarPais = document.getElementById('btnEditarPais')
     const formEditar = document.getElementById('formEditar')
 
-    btnEditarSuperheroe.addEventListener('click', async (event) => {
+    btnEditarPais.addEventListener('click', async(event) => {
         event.preventDefault()
 
         if (!formEditar.checkValidity()) { //habilitra la validacion del formulario
@@ -12,35 +11,36 @@ window.addEventListener("load", () => {
             return;
         }
 
-        const superheroe = {
-            nombreSuperheroe: formEditar.nombreSuperheroe.value,
-            nombreReal: formEditar.nombreReal.value,
-            edad: formEditar.edad.value,
-            planetaOrigen: formEditar.planetaOrigen.value,
-            debilidad: formEditar.debilidad.value,
-            poderes: formEditar.poderes.value.split(',').map(p => p.trim()),
-            aliados: formEditar.aliados.value.split(',').map(a => a.trim()),
-            enemigos: formEditar.enemigos.value.split(',').map(e => e.trim()),
+
+        const pais = {
+            name: { nativeName: { spa: { official: formEditar.nombrePais.value } } },
+            capital: formEditar.capital.value.split(',').map(p => p.trim()),
+            borders: formEditar.fronteras.value.split(',').map(p => p.trim()),
+            area: formEditar.area.value,
+            population: formEditar.poblacion.value,
+            gini: {
+                [formEditar.aniogini.value]: formEditar.valorgini.value
+            },
+            timezones: formEditar.timezones.value.split(',').map(p => p.trim())
         };
 
         try {
-            //const response = await fetch('/api/heroes/:id/editar', {
-            const response = await fetch(`/api/heroes/actualizar/${formEditar.id.value}`, {
+
+            const response = await fetch(`/paises/actualizar/${formEditar.id.value}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(superheroe),
+                body: JSON.stringify(pais),
             });
 
             if (response.ok) {
-                const superheroeActualizado = await response.json();
+                const paisActualizado = await response.json();
 
-                // alert('Superhéroe actualizado con éxito: ' + superheroeActualizado.Nombre);
-                window.location.href = `/api/heroes`  //redirige al dashboard
+                window.location.href = `/paises` //redirige al dashboard
             } else {
                 const error = await response.json();
-                alert('Error al editar el superhéroe: ' + error.message);
+                alert('Error al editar el pais: ' + error.message);
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);

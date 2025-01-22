@@ -1,18 +1,12 @@
-export function renderizarSuperheroe(superHeroe) {
+export function renderizarPais(pais) {
     return {
-        Nombre: superHeroe.nombreSuperheroe,
-        'Nombre Real': superHeroe.nombreReal,
-        edad: superHeroe.edad,
-        'Planeta de Origen': superHeroe.planetaOrigen,
-        Debilidad: superHeroe.debilidad,
-        Poderes: superHeroe.poderes,
-        Aliados: superHeroe.aliados,
-        Enemigos: superHeroe.enemigos,
-        autor: 'Javier Acosta Grupo-01' 
+        Nombre: pais.name.nativeName.spa.official,
+        capital: pais.capital.join(', '),
+        fronteras: pais.borders.join(', '),
+        area: pais.area,
+        poblacion: pais.population,
+        // aniogini: pais.gini.
+        timezones: pais.timezones.join(', ')
     }
 
-}
-
-export function renderizarListaSuperheroes(superheroes) {
-    return superheroes.map(superheroe => renderizarSuperheroe(superheroe))
 }

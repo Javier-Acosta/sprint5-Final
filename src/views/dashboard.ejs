@@ -1,75 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/styles.css">
-  <title>Heroes</title>
-</head>
-
 <body>
-
-  <h1 class="mt-5 text-center text-2xl/9 font-bold tracking-tight text-gray-900"> Superheroes</h1>
-
-
-
-  <button type="button" class="m-5 flex button-agregar  top-0 end-0 btn btn-primary position-relative" value="">Agregar
-    Superheroe <span
-      class=" position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span
-        class="visually-hidden">unread messages</span></span></button>
-
-
-  <div class=" card-container">
-    
-      <% superheroes.forEach(heroe=>{ %>
-        <div class="card  " style="width: 18rem">
-          <h2>
-            <%= heroe.nombreSuperheroe %>
-          </h2>
-          <ul class="list-group list-group-flush">
-            <li class="card-title list-group-item"><b>Nombre real: </b>
-              <%= heroe["nombreReal"] %>
-            </li>
-            <li class="card-text list-group-item"><b>Edad:</b>
-              <%= heroe.edad %>
-            </li>
-            <li class="list-group-item"><b>Poderes:</b>
-              <%= heroe.poderes.join(", ") %></li>
-                    <li class=" list-group-item"><b>Planeta de origen:</b>
-                <%= heroe.planetaOrigen %>
-            </li>
-          </ul>
-          <div class="button-container">
-
-            <button class="flex btn btn-primary button-editar" id="editar-<%= heroe.id %>"
-              value="<%= heroe.id %>">Editar </button>
-            <button class="btn btn-primary button-eliminar end-0" id="eliminar-<%= heroe.id %>" value="<%= heroe.id %>">
-              Eliminar </button>
-          </div>
+    <div class="list-container fondo-oscuro">
+        <div>
+            <h1 class="titulo"> Paises</h1>
         </div>
 
-        <!-- <input type="button"  id="<%= 'btn' + heroe.id %>" value="Editar" onclick="editarSuperheroe(<%= heroe.id %>)"> -->
-        <!-- <input type="button"  id="<%= heroe.id %>" value="Editar" > -->
-        <% }) %>
+        <div class="card-container">
+            <% paises.forEach(pais =>{ %>
+                <div class="card">
+                    <h2>
+                        <%= pais.name.nativeName.spa.official %>
+                    </h2>
+                    <ul>
+                        <li><b>Capitall: </b>
+                            <%= pais.capital %>
+                        </li>
+                        <li><b>Límites:</b>
+                            <%= pais.borders.join(", ") %>
+                        </li>
+                        <li><b>Area:</b>
+                            <%= pais.area %>
+                        </li>
+                        <li><b>Población:</b>
+                            <%= pais.population %>
+                        </li>
 
-        
-      </div>
-      <div class="m-5 ">
+                        <li><b>Zonas horarias:</b>
+                            <%= pais.timezones.join(", ") %>
+                        </li>
+                        <li><b>Creador:</b>
+                            <%= pais.creador %>
+                        </li>
+                    </ul>
+                    <div class="button-container">
 
-       
-        <a href="#" class="flex btn btn-primary">Ir arriba</a>
-      </div>
+                        <button class="button button-editar" id="editar-<%= pais._id %>" value="<%= pais._id %>">Editar </button>
+                        <button class="button button-eliminar" id="eliminar-<%= pais._id %>" value="<%= pais._id %>"> Eliminar </button>
+                    </div>
+                </div>
 
-  </div>
-  <script src="/js/dashboardScripts.js"> </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
+                <!-- <input type="button"  id="<%= 'btn' + pais.id %>" value="Editar" onclick="editarSuperpais(<%= pais.id %>)"> -->
+                <!-- <input type="button"  id="<%= pais.id %>" value="Editar" > -->
+                <%  }) %>
+        </div>
+        <script src="/js/dashboardScripts.js">
+        </script>
+    </div>
 </body>
-
-</html>
