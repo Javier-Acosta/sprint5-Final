@@ -12,13 +12,12 @@ export default class IRepository {
     }
 
     actualizarPaisPorId(id) {
-        throw new Error("Metodo 'actualizarPais()' no implementado")
+        throw new Error("Metodo 'actualizarPaisPorId' no implementado")
     }
 
     borrarPaisPorId(id) {
         throw new Error("Metodo no implementado")
     }
 
-    
-}
 
+}

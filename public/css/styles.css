@@ -63,6 +63,8 @@ body {
 }
 
 .card-container {
+    margin: 3%;
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

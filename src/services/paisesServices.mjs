@@ -1,18 +1,21 @@
 import { CountryModel } from "../models/countryModel.mjs";
-import paisesRepository from "../repositories/paisesRepository.mjs";
+import PaisesRepository from '../repositories/paisesRepository.mjs'
 
-const repository = paisesRepository
+const repository = PaisesRepository
 
-export function obtenerTodosLosPaises() {
+export function obtenerTodoslosPaises() {
     const paises = repository.obtenerTodos()
     return paises
 }
 
 
+// Servicio para consumir la API
+
+
+// trae todos los paises desde la api
 export async function getAllCountries() {
-
-
     const API_URL = 'https://restcountries.com/v3.1/all';
+
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
@@ -25,17 +28,6 @@ export async function getAllCountries() {
     }
 
 }
-
-
-// export async function obtenerPaises() {
-//     try {
-//         const response = await axios.get(API_URL);
-//         return response.data;
-//     } catch (error) {
-//         console.log(`Error, no se pudo obtner resultado ${API_URL}`);
-//         throw error;
-//     }
-// }
 
 async function getCountriesByRegion(region) {
     const allCountries = await this.getAllCountries();
@@ -63,20 +55,20 @@ export async function borrarTodos() {
 
 
 //obtiene el pais para el ID indicado
-export function obtenerPorId(id) {
+export function obtenerPaisPorId(id) {
     const pais = repository.obtenerPorId(id)
     return pais
 }
 
 
 //actualiza el documento mongodb
-export async function actualizarPaisPorId(id, datos) {
-    const pais = await repository.actualizarPaisPorId(id, datos)
+export async function actualizarPais(id, datos) {
+    const pais = await repository.actualizarPais(id, datos)
     return pais
 }
 
 //borra un pais indicando el ID
-export async function borrarPaisPorId(id) {
-    const pais = await repository.borrarPaisPorId(id)
+export async function borrarPais(id) {
+    const pais = await repository.borrarPais(id)
     return pais
 }

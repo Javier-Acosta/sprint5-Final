@@ -1,82 +1,69 @@
-import { getAllCountries, agregarPais, obtenerTodos, borrarTodos, actualizarPaisPorId, obtenerPorId, borrarPaisPorId } from "../services/paisesServices.mjs"
+import { getAllCountries, agregarPais, obtenerTodos, borrarTodos, obtenerPaisPorId, actualizarPais, borrarPais } from "../services/paisesServices.mjs"
 import { renderizarPais } from "../views/responseView.mjs"
 
-// obtener tosos los paises del al  api y los almacena en MongoDB
-
+//obtiene todos los paises de la api y los almacena en mongoDB
 export async function obtenerCountriesController(req, res) {
-    const contries = await getAllCountries()
-    const respuesta = await getAllCountries(contries)
-    console.log(respuesta)
+    const countries = await getAllCountries()
+        // console.log('countries', JSON.stringify(countries))
+    const respuesta = await agregarPais(countries)
+        //console.log(respuesta)
+        //await res.render('dashboard',  { paises })
     obtenerPaisesController(req, res)
-
-
 }
 
-// obtiene paises desde MongoDB
-
+//obtiene los paises desde mongodb
 export async function obtenerPaisesController(req, res) {
     const paises = await obtenerTodos()
-        // console.log('Paises', JSON.stringify(paises))
+        //  console.log('Paises', JSON.stringify(paises))
 
     res.render('dashboard', { paises })
-
 }
 
-// limpia la coleccion paises en mongoDB
-
+//limpia la coleccon paises en mongodb
 export async function vaciarPaisesController(req, res) {
-
     const respuesta = await borrarTodos()
-        // console.log('Paises borrados', JSON.stringify(respuesta))
-
+        //  console.log('Paises borrados', JSON.stringify(respuesta))
     obtenerPaisesController(req, res)
-
-
 }
 
-// muestra formulario para cargar un pais
-
-export async function nuevoPaisController(req, res) {
+//muestra el formulario para cargar un nuevo pais
+export async function nuevoPaisesController(req, res) {
     res.render('addPais')
-
 }
 
-// envia los campos del formulario a mongoDb
+//envia los campos del formulario a mongodb
 export async function agregarPaisesController(req, res) {
     const respuesta = await agregarPais(req.body)
+        //console.log(respuesta)
     res.send(respuesta)
+        // obtenerPaisesController(req, res)
 
 }
 
-// renderizala vista para ediar pais 
+//renderiza la vista para editar el pais
 export async function editarController(req, res) {
     const { pais, id } = req.query
     res.render('editPais', { pais: JSON.parse(pais), id })
-
 }
 
 // busca un pais por ID
 export async function obtenerPaisPorIdController(req, res) {
     const { id } = req.params
-    const pais = await obtenerPorId(id)
+    const pais = await obtenerPaisPorId(id)
 
     if (pais) {
         res.send(renderizarPais(pais));
-
-
     } else {
         res.status(404).send({ mensaje: 'País no encontrado' })
     }
 
 }
 
-
-// envia las modificaciones a mongoDB
-
+// envia las modificaciones a mongodb
 export async function actualizarPaisController(req, res) {
 
     try {
-        const pais = await actualizarPaisPorId(req.params.id, req.body)
+        const pais = await actualizarPais(req.params.id, req.body)
             // console.log(pais)
         res.send(renderizarPais(pais))
 
@@ -88,6 +75,6 @@ export async function actualizarPaisController(req, res) {
 
 
 export async function borrarPaisController(req, res) {
-    const pais = await borrarPaisPorId(req.params.id)
+    const pais = await borrarPais(req.params.id)
     res.send(renderizarPais(pais))
 }

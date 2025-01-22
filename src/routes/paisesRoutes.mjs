@@ -1,6 +1,6 @@
 import express from "express";
 
-import { obtenerCountriesController, obtenerPaisesController, vaciarPaisesController, nuevoPaisController, agregarPaisesController, editarController, obtenerPaisPorIdController, actualizarPaisController, borrarPaisController } from '../controllers/PaisesController.mjs'
+import { obtenerCountriesController, obtenerPaisesController, vaciarPaisesController, nuevoPaisesController, agregarPaisesController, editarController, obtenerPaisPorIdController, actualizarPaisController, borrarPaisController } from '../controllers/PaisesController.mjs'
 import { paisValidation } from '../validators/paisValidator.mjs'
 import { handleValidationErrors } from "../middlewares/errorMiddleware.mjs";
 
@@ -11,7 +11,7 @@ router.get('/', (req, res) => { res.render('home', { 'title': 'Lista de Paises d
 router.get('/paises/obtener', obtenerCountriesController)
 router.get('/paises', obtenerPaisesController)
 router.get('/paises/vaciar', vaciarPaisesController)
-router.get('/paises/nuevo', nuevoPaisController)
+router.get('/paises/nuevo', nuevoPaisesController)
 router.get('/paises/id/:id', obtenerPaisPorIdController)
 
 router.post('/paises/agregar/', paisValidation(), handleValidationErrors, agregarPaisesController)
